@@ -15,7 +15,7 @@ namespace Calculator.GlobalE.Logic
                 return new Number(number);
             }
 
-            var operatorLocation = OperatorsBuilder.FindLeastPriorityOperator(s);
+            var operatorLocation = OperatorsBuilder.FindHighestPriorityOperator(s);
             var lhs = Construct(s.Substring(0, operatorLocation));
             var rhs = Construct(s.Substring(operatorLocation + 1));
             var op = OperatorsBuilder.Construct(s[operatorLocation]);

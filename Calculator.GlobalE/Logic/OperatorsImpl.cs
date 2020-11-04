@@ -18,7 +18,7 @@ namespace Calculator.GlobalE.Logic
 
         public static IOperator Construct(char c) => (IOperator)Activator.CreateInstance(OperatorsRegistry[c].Item1);
 
-        public static int FindLeastPriorityOperator(string s)
+        public static int FindHighestPriorityOperator(string s)
         {
             int maxPriority = 0;
             int index = -1;
