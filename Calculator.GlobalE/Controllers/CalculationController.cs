@@ -12,7 +12,22 @@ namespace Calculator.GlobalE.Controllers
     {
         public IHttpActionResult Post([FromBody] string input)
         {
-            var result = ExpressionBuilder.Construct(input).Calculate();
+            if (OperatorsBuilder.RepositoryCache.Get(input) != null)
+            {
+                return Ok(OperatorsBuilder.RepositoryCache.Get(input));
+            }
+
+            string result;
+            try
+            {
+                result = ExpressionBuilder.Construct(input).Calculate().ToString();
+            }
+            catch(Exception e)
+            {
+                result = e.Message;
+            }
+
+            OperatorsBuilder.RepositoryCache.Insert(input, result, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(10));
             return Ok(result);
         }
     }

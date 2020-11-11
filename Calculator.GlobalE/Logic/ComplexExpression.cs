@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Caching;
 
@@ -10,6 +11,7 @@ namespace Calculator.GlobalE.Logic
     {
         public static IExpression Construct(string s)
         {
+            s = OperatorsBuilder.CleanExternalParentheses(s);
             if (float.TryParse(s, out var number))
             {
                 return new Number(number);
