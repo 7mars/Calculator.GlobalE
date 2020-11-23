@@ -10,6 +10,10 @@
     <div class="col-md-4">
         <label>Result</label>
         <div id="result"></div>
+    </div>    
+    <div class="col-md-4">
+        <label>Result conventional</label>
+        <div id="resultConventional"></div>
     </div>
 </div>
 
@@ -29,6 +33,16 @@
                 data: { "": $("#inputTxt").val()},
                 success: function (response) {
                     $("#result").html(response);
+                }
+            })
+
+        $.ajax("/api/calculationConventional/",
+            {
+                type: 'POST',
+                dataType: 'json',
+                data: { "": $("#inputTxt").val() },
+                success: function (response) {
+                    $("#resultConventional").html(response);
                 }
             })
     });
